@@ -1,4 +1,4 @@
-from .file_register import FileRegister
+from file_register import FileRegister
 import json
 import os
 
@@ -8,7 +8,7 @@ class LocallyRegister(FileRegister):
     def __init__(self):
         super().__init__()
 
-    def __register(self, day, month, year, data: bytes, base_name='file', page=1):
+    def _FileRegister__register(self, day, month, year, data: bytes, base_name='file', page=1):
 
         dir_path = os.path.join(year, month, day)
         if os.path.exists(dir_path) == False:

@@ -18,8 +18,10 @@ class Extractor:
             response = self.get_data(base_url, start_date, end_date, auth)
             first_page = dict(response.json())
             self.total_pages = first_page["total"]
-            self.registerer(response.content, base_name='file',
+            self.registerer.save(response.content, base_name='file',
                             page=1, reg_date=end_date)
+        except Exception as e:
+            print(e)
 
     def fetch_content(self, base_url, start_date, end_date, auth):
 
@@ -32,5 +34,5 @@ class Extractor:
             response = self.get_data(
                 base_url, start_date, end_date, auth, page=i)
             curr_page_data = response.content
-            self.registerer(response.content, base_name='file',
+            self.registerer.save(response.content, base_name='file',
                             page=1, reg_date=end_date)

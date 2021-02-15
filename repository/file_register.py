@@ -1,7 +1,6 @@
 from datetime import date
-from utils import format_date
 from abc import ABC, abstractmethod
-
+from utils import format_date
 
 class FileRegister(ABC):
 
@@ -21,5 +20,6 @@ class FileRegister(ABC):
         """ base_url should end with '/'
             Example: base_url='raw/batch_layer/' 
         """
+        print(f"{base_url}{year}/{month}/{day}/{base_name}_{year}_{month}_{day}__{page:04d}.json")
 
         return f"{base_url}{year}/{month}/{day}/{base_name}_{year}_{month}_{day}__{page:04d}.json"

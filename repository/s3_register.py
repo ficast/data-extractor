@@ -13,7 +13,7 @@ class S3Register(FileRegister):
         self.bucket_name = bucket_name
         self.threads = threads
 
-    def __register(self, day, month, year, data: bytes, base_name='file', page=1):
+    def _FileRegister__register(self, day, month, year, data: bytes, base_name='file', page=1):
 
         with ThreadPoolExecutor(max_workers=self.threads) as executor:
             executor.submit(
