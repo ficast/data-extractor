@@ -1,4 +1,4 @@
-from file_register import FileRegister
+from .file_register import FileRegister
 import json
 import os
 

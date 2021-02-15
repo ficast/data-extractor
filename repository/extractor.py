@@ -3,9 +3,11 @@ class Extractor:
     def __init__(self, requests, registerer):
         self.data = []
         self.requests = requests
+        self.registerer = registerer
+        self.first_page = None
 
     def get_data(self, base_url, start_date, end_date, auth, page=1) -> bytes:
-        url = base_url.format(start_date, end_date, page)
+        url = base_url.format(s=start_date, e=end_date, p=page)
         try:
             response = self.requests.get(url, headers={'Authorization': auth})
             return response
@@ -16,10 +18,10 @@ class Extractor:
     def fetch_first_page(self, base_url, start_date, end_date, auth):
         try:
             response = self.get_data(base_url, start_date, end_date, auth)
-            first_page = dict(response.json())
-            self.total_pages = first_page["total"]
-            self.registerer.save(response.content, base_name='file',
-                                 page=1, reg_date=end_date)
+            self.first_page = dict(response.json())
+            self.total_pages = self.first_page["total"]
+            print(self.first_page["total"])
+            self.registerer(response.content, base_name='file', page=1)
         except Exception as e:
             print(e)
 
